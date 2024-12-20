@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Smarter Banking Chatfin</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t2.value.length==0)
+	{
+	alert("Please Enter Loan Amount");
+	formObj.t2.focus();
+	return false;
+	}
+	if(formObj.t3.value.length==0)
+	{
+	alert("Please Enter Pan No");
+	formObj.t3.focus();
+	return false;
+	}
+	if(formObj.t3.value.length !== 10)
+	{
+	alert("Pan No must be 10 digits long");
+	formObj.t3.focus();
+	return false;
+	}
+	if(isNaN(formObj.t4.value)){
+		window.alert("Aadhar number must be digits only");
+		formObj.t4.focus();
+		return false;
+	}
+	if(formObj.t4.value.length !== 12)
+	{
+	alert("Aadhar No must be 12 digits long");
+	formObj.t4.focus();
+	return false;
+	}
+	return true;
+	}
+	</script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<center><font size="4" color="yellow">Smarter Banking Chatfin </font></center>
+		</div>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+		<ul><center>
+			<li class="first current_page_item"><a href="{% url 'TextChatbot' %}"><font size="" color="yellow">Interact with Chatbot</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'ApplyLoan' %}"><font size="" color="yellow">Apply For Loan</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'ViewStatus' %}"><font size="" color="yellow">View Loan Status</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'index' %}"><font size="" color="yellow">Logout</font></a></li>
+		</center></ul>	<br class="clearfix" />
+				</div>
+			
+	<div id="splash">
+		<img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+	</div>	
+			<center>
+<form name="f1" method="post" action={% url 'ApplyLoanAction' %} onsubmit="return validate(this);">
+<br/>{% csrf_token %}<br/>
+   <h3><b>Loan Application Screen</b></h3>
+   
+   <font size="" color="red"><center>{{ data|safe }}</center></font>
+
+				
+						<table align="center" width="40" >
+			 <tr><td><font size="" color="black"><b>Loan&nbsp;Purpose</b></td><td><select name="t1">
+			 <option value="Personal Loan">Personal Loan</option>
+			 <option value="Education Loan">Education Loan</option>
+			 <option value="Home Loan">Home Loan</option>
+			 <option value="Other">Other</option>
+			 </td></tr>
+         
+		  <tr><td><font size="" color="black"><b>Loan&nbsp;Amount</b></td><td><input type="text" name="t2" style="font-family: Comic Sans MS" size="15"/></td></tr>		
+		  
+		  <tr><td><font size="" color="black"><b>Pan&nbsp;No</b></td><td><input type="text" name="t3" style="font-family: Comic Sans MS" size="20"/></td></tr>	
+
+		  <tr><td><font size="" color="black"><b>Aadhar&nbsp;No</b></td><td><input type="text" name="t4" style="font-family: Comic Sans MS" size="25"/></td></tr>	
+
+
+			<tr><td></td><td><input type="submit" value="Submit">
+
+			</td>
+			</tr>
+			</table>
+				</div>	
+					
+				</div>
+				<br/><br/>
+	</body>
+</html>

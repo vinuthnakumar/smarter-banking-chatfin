@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Smarter Banking Chatfin</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<script>
+function displayFullName() {
+    var request = new XMLHttpRequest();
+	var input = document.getElementById("t2").value;
+	var mydata = ""
+	mydata = mydata + document.getElementById("t1").value+"\n"
+	mydata = mydata + "You: "+input+"\n"
+	request.open("GET", "http://127.0.0.1:8000/ChatData?mytext="+input);
+	request.onreadystatechange = function() {
+    if(this.readyState === 4 && this.status === 200) {
+	   var output = this.responseText;
+	   document.getElementById("t2").value = "";
+	   mydata = mydata + output+"\n";
+	   document.getElementById("t1").innerHTML = mydata;
+	   document.getElementById("t2").innerHTML = "";
+	  }
+    };
+	request.send();
+}
+</script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<center><font size="2" color="yellow">Smarter Banking Chatfin</font></center>
+		</div>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+
+	<ul><center>
+			<li class="first current_page_item"><a href="{% url 'TextChatbot' %}"><font size="" color="yellow">Interact with Chatbot</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'ApplyLoan' %}"><font size="" color="yellow">Apply For Loan</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'ViewStatus' %}"><font size="" color="yellow">View Loan Status</font></a></li>
+		<li class="first current_page_item"><a href="{% url 'index' %}"><font size="" color="yellow">Logout</font></a></li>
+		</center></ul>
+		<br class="clearfix" />
+	</div>
+	<div id="splash">
+		<img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+	</div>
+	<br/>
+	 <font size="" color="red"><center>{{ data|safe }}</center></font>
+
+	  
+	<center><font size="" color="black">Chat with ChatBot</center></font></p>
+	<div id="offers">
+	
+    </div>
+<br/>
+         
+	<div id="result">
+        &nbsp;&nbsp;&nbsp;<textarea name="t1" id="t1" rows="20" cols="80"  style="font-family:Times New Roman;color:#003399;font-size: 18px;white-space:pre-wrap"></textarea>
+    </div>
+	&nbsp;&nbsp;&nbsp;<input type="text" name="t2" id="t2" size="60"/>
+   &nbsp;&nbsp;&nbsp; <button type="button" onclick="displayFullName()">Click Here to Send Message</button>
+
+	<br/><br/><br/><br/><br/>
+</body>
+</html>
