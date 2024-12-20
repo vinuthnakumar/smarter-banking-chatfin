@@ -1,0 +1,23 @@
+create database BankChatbot;
+use BankChatbot;
+
+create table register(username varchar(30) primary key,
+password varchar(30),
+contact varchar(12),
+email varchar(30),
+address varchar(40));
+
+create table interaction(interact_id int,
+username varchar(40),
+question varchar(1350),
+answer varchar(3650),
+interact_date varchar(40));
+
+create table loan(loan_id int,
+username varchar(40),
+loan_purpose varchar(50),
+amount varchar(20),
+pan_no varchar(20),
+aadhar_no varchar(20),
+applied_date varchar(30),
+status varchar(20));
